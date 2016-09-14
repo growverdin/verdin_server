@@ -1,0 +1,337 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+   		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="css/bootstrap-datepicker3.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script src="js/bootstrap-datepicker.min.js"></script>
+		<script src="httpRequests.js"></script>
+                <script src="loads.js"></script>
+		<script src="actions.js"></script>
+		<script src="user.js"></script>
+		<script type="text/javascript" src="charts.js"></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" style="padding: 0px; display: inline;" href="#">
+						<span><img alt="Verdin" src="../imgs/logo_verdin.png" height="50"></span>
+						My Garden
+					</a>
+					
+					<button id="navBarButton" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navHeaderCollapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+			   	</div> 
+			    	<div class="collapse navbar-collapse" id="navHeaderCollapse">
+			      		<ul id="navBarLinks" class="nav navbar-nav navbar-right">
+				        	<li id="measurementsLink">
+				        		<a href="javascript: load_measurementsPage(); measurementsLinkClick();">Measurements</a>
+				        	</li>
+						<li id="linksLink">
+							<a href="javascript: load_linksPage(); linksLinkClick();">Links</a>
+						</li>
+						<li id="socialNetworkLink">
+							<a href="#">Social</a>
+						</li>
+			      		</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div id="linksPage" class="page">
+			<div class="container">
+				
+				<div class="panel panel-default">
+                                        <div class="panel-heading"><h3 style="margin: 0px">Plantations</h3></div>
+                                        <div id="plantations" class="table-responsive"></div>
+                                </div>
+                                <a class="btn btn-primary" href="javascript: load_addPlantationPage(); displayPage('addPlantationPage');">Add New Plantation</a>
+
+                                <br /><br /><br />
+
+				<div class="panel panel-default">
+					<div class="panel-heading"><h3 style="margin: 0px">Verdin Devices</h3></div>
+					<div id="verdinDevices" class="table-responsive"></div>
+				</div>
+				<a class="btn btn-primary" href="javascript: displayPage('addDevicePage');">Add New Device</a>
+
+				<br /><br /><br />
+				
+				<div class="panel panel-default">
+                                        <div class="panel-heading"><h3 style="margin: 0px">Linked Sensors</h3></div>
+                                        <div id="linkedSensors" class="table-responsive"></div>
+                                </div>
+                                <a class="btn btn-primary" href="javascript: load_linkSensorPage(); displayPage('linkSensorPage');">Link New Sensor</a>
+
+				<br /><br /><br />
+
+				<div class="panel panel-default">
+                                        <div class="panel-heading"><h3 style="margin: 0px">Linked Actuators</h3></div>
+                                        <div id="linkedActuators" class="table-responsive"></div>
+                                </div>
+                                <a class="btn btn-primary" href="javascript: load_linkActuatorPage(); displayPage('linkActuatorPage');">Link New Actuator</a>
+			</div>
+		</div>
+
+		<div id="addPlantationPage" class="page">
+                        <div class="container">
+                                <div class="panel panel-default">
+                                        <div class="panel-heading"><h3 style="margin: 0px">New Plantation</h3></div>
+                                        <div class="container">
+                                                <br />
+                                                <div class="row">
+                                                        <div class="col-lg-6">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="addPlantationName">Name: </label>
+                                                                        <input class="form-control" id="addPlantationName" type="text" placeholder="Give it a name (you can change later)">
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-lg-6">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="addPlantationSpecies">Species: </label>
+                                                                        <select class="form-control" id="addPlantationSpecies">
+                                                                        </select>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <a class="btn btn-success" href="javascript: addPlantation()">Add Plantation</a>
+                        </div>
+                </div>
+
+		<div id="addDevicePage" class="page">
+                        <div class="container">
+                                <div class="panel panel-default">
+                                        <div class="panel-heading"><h3 style="margin: 0px">New Device</h3></div>
+                                        <div class="container">
+                                                <br />
+                                                <div class="row">
+                                                        <div class="col-lg-6">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="deviceName">Name: </label>
+                                                                        <input class="form-control" id="addDeviceName" type="text" placeholder="Give it a name (you can change later)">
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-lg-6">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="deviceMacAddress">Mac Address: </label>
+                                                                        <input class="form-control" id="addDeviceMacAddress" type="text" placeholder="e.g., 00:00:00:FF:FF:FF">
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <a class="btn btn-success" href="javascript: addDevice()">Add Device</a>
+                        </div>
+                </div>
+
+		<div id="linkSensorPage" class="page">
+			<div class="container">
+				<div class="panel panel-default">
+                                        <div class="panel-heading"><h3 style="margin: 0px">New Sensor</h3></div>
+					<div class="container">
+						<br />
+						<div class="row">
+                                                        <div class="col-lg-6">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="linkSensorSensor">Sensor: </label>
+                                                                        <select class="form-control" id="linkSensorSensor">
+                                                                        </select>
+                                                                </div>
+                                                        </div>
+                                                </div>
+						<div class="row">
+                                                        <div class="col-lg-6">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="linkSensorPlantation">Plantation: </label>
+                                                                        <select class="form-control" id="linkSensorPlantation">
+                                                                        </select>
+                                                                </div>
+                                                        </div>
+                                                </div>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group form-inline">
+									<label for="linkSensorDevice">Verdin Device: </label>
+									<select onchange="linkSensorDeviceChanged()" class="form-control" id="linkSensorDevice">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+                                                        <div class="col-lg-6">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="linkSensorReadPort">Read Port: </label>
+                                                                        <select class="form-control" id="linkSensorReadPort">
+                                                                        </select>
+                                                                </div>
+                                                        </div>
+                                                </div>
+						<div class="row">
+                                                        <div class="col-lg-6">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="linkSensorPowerPort">Power Port: </label>
+                                                                        <select class="form-control" id="linkSensorPowerPort">
+                                                                        </select>
+                                                                </div>
+                                                        </div>
+                                                </div>
+					</div>
+				</div>
+				<a class="btn btn-success" href="javascript: linkSensor()">Link Sensor</a>
+			</div>
+		</div>
+
+		<div id="linkActuatorPage" class="page">
+                        <div class="container">
+                                <div class="panel panel-default">
+                                        <div class="panel-heading"><h3 style="margin: 0px">New Actuator</h3></div>
+                                        <div class="container">
+                                                <br />
+						<div class="row">
+                                                        <div class="col-lg-6">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="linkActuatorActuator">Actuator: </label>
+                                                                        <select class="form-control" id="linkActuatorActuator">
+                                                                        </select>
+                                                                </div>
+                                                        </div>
+                                                </div>
+						<div class="row">
+                                                        <div class="col-lg-6">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="linkActuatorPlantation">Plantation: </label>
+                                                                        <select onchange="linkActuatorPlantationChanged()" class="form-control" id="linkActuatorPlantation">
+                                                                        </select>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-lg-6">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="linkActuatorDevice">Verdin Device: </label>
+                                                                        <select onchange="linkActuatorDeviceChanged()" class="form-control" id="linkActuatorDevice">
+                                                                        </select>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-lg-6">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="linkActuatorPort">Port: </label>
+                                                                        <select class="form-control" id="linkActuatorPort">
+                                                                        </select>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+				<div id="linkActuatorBehaviorId2" class="panel panel-default">
+					<div class="panel-heading"><h3 style="margin: 0px">Behavior</h3></div>
+					<div class="container">
+						<br />
+
+						<div class="row">
+                                                        <div class="col-lg-6">
+                                                                <div class="form-group form-inline">
+									<label>Based on: </label>
+									<label onchange="linkActuatorBasedonRadioChanged()" class="radio-inline"><input id="linkActuatorBasedonRadio0" type="radio" name="linkActuatorBasedonRadio">Periodicity</label>
+									<label onchange="linkActuatorBasedonRadioChanged()" class="radio-inline"><input id="linkActuatorBasedonRadio1" type="radio" name="linkActuatorBasedonRadio">Linked Sensor</label>
+								</div>
+                                                        </div>
+                                                </div>
+
+                                                <div id="linkActuatorSensorRow" class="row" style="display: none;">
+                                                        <div class="col-lg-6">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="linkActuatorSensor">Sensor: </label>
+                                                                        <select class="form-control" id="linkActuatorSensor">
+                                                                        </select>
+                                                                </div>
+                                                        </div>
+                                                </div>
+						<div id="linkActuatorMoistureLevelRow" class="row" style="display: none;">
+                                                        <div class="col-lg-4">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="linkActuatorMoistureLevel">Desired Moisture Level: </label>
+                                                                        <input id="linkActuatorMoistureLevel" type="range" min="0" max="100">
+                                                                </div>
+                                                        </div>
+                                                </div>
+
+						<div id="linkActuatorPeriodRow" class="row" style="display: none;">
+                                                        <div class="col-lg-4">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="linkActuatorPeriod">Period: </label>
+                                                                        <input id="linkActuatorPeriod" type="range" min="1" max="24">
+                                                                </div>
+                                                        </div>
+                                                </div>
+
+						<div class="row">
+                                                        <div class="col-lg-4">
+                                                                <div class="form-group form-inline">
+                                                                        <label for="linkActuatorWateringRange">Watering time: </label>
+										<input id="linkActuatorWateringRange" type="range" min="1" max="10">
+								</div>
+                                                        </div>
+                                                </div>
+
+					</div>
+				</div>
+
+                                <a class="btn btn-success" href="javascript: linkActuator()">Link Actuator</a>
+                        </div>
+                </div>
+
+		<div id="measurementsPage" class="page">
+			<div class="container">
+				<div class="panel panel-default">
+					<div class="panel-heading"><h3 style="margin: 0px">Measurements</h3></div>
+					<div class="container">
+						<br />	
+						<div class="row">
+                                                        <div class="col-lg-1 col-lg-offset-4">
+								<div class="form-group form-inline">
+                                                                        <h4>Date: </h4>
+                                                                </div>
+							</div>
+							<div class="col-lg-3">
+								<div class="form-group form-inline">
+									<div class="input-group date" data-provide="datepicker">
+										<input type="text" class="form-control" id="measurementsDate" onchange="drawMeasurementsCharts()">
+										<div class="input-group-addon">
+											<span class="glyphicon glyphicon-th"></span>
+										</div>
+									</div>                                                                
+
+								</div>
+
+                                                        </div>
+                                                </div>
+				
+					</div>
+					<div id="measurementsCharts">
+					</div>
+					<div id="measurements" class="table-responsive"></div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>

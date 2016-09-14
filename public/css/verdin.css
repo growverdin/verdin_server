@@ -1,0 +1,210 @@
+/*
+	Background conf
+*/
+@media screen and (min-width: 820px) {
+	body {
+		background-image: url('../imgs/background_flowers_landscape.jpg');
+	}
+}
+@media screen and (max-width: 819px) {
+	body {
+		background-image: url('../imgs/background_flowers_portrait.jpg');
+	}
+}
+body {
+	margin: 0px;
+	visibility: hidden;
+	min-height: 420px;
+}
+/*
+	Loading div conf
+*/
+@-webkit-keyframes pulse {
+    0% { -webkit-transform: scale(1); }
+    50% { -webkit-transform: scale(1.1); }
+    100% { -webkit-transform: scale(1); }
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.pulse {
+	animation-duration: 1s;
+	animation-name: pulse;
+	animation-iteration-count: infinite;
+}
+#loading {
+	position: fixed;
+	visibility: hidden;
+	text-align: center;
+	color: white;
+	text-shadow: 0px 0px 15px rgba(0,0,0,1),
+				1px 1px 1px rgba(0,0,0,1);
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+
+/*
+	All content div for everything above the background
+*/
+.content {
+	/*background: rgba(0,0,0,0.2);*/
+
+	text-align: center;
+	margin: auto;
+}
+
+/*
+	Header selectors
+*/
+#mygarden_arrow {
+	position: fixed;
+}
+#header_logo {
+	width: 150px;
+	max-width: 150px;
+}
+.header {
+	/*background: rgba(0,0,0,0.2);*/
+
+	text-align: center;
+    letter-spacing: 1px;
+    position: fixed;
+    top: 0px;
+}
+.header_left h2 {
+	color: white;
+	font-family: Courier;
+	text-shadow: 0px 0px 4px rgba(0,0,0,1), 1px 1px 1px rgba(0,0,0,1);
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.header h2, .header_left, .header_right, .header img {
+    display: inline-block;
+    vertical-align: middle;
+}
+.header_right, .header_left {
+	/*background: rgba(0,0,0,0.2);*/
+
+	position: fixed;
+}
+.header_right a {
+	text-decoration: none;
+	color: white;
+	font-family: Georgia;
+	text-shadow: 0px 0px 4px rgba(0,0,0,1), 1px 1px 1px rgba(0,0,0,1);
+}
+.header_right a:hover {
+	text-decoration: underline;
+}
+.header_right a:visited {
+	text-decoration: none;
+}
+.header_right ul {
+	list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+.header_right li {
+	display: inline-block;
+	padding: 10px;
+	background-color: rgba(0,0,0,0.2);
+	border-radius: 25px;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+.space {
+	display: inline-block;
+	width: 0px;
+}
+
+/*
+	Other componets
+*/
+h1,h2,h3,h4 {
+	margin: 0px;
+}
+
+/*
+	Body Content
+*/
+.body_content {
+	/*background: rgba(0,0,0,0.2);*/
+
+	position: fixed;
+}
+.main_call {
+	/*background: rgba(0,0,0,0.2);*/
+
+}
+.main_call h1 {
+	color: white;
+	text-shadow: 0px 0px 15px rgba(0,0,0,1),
+				1px 1px 1px rgba(0,0,0,1);
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+.main_call h2, .main_call h3, .main_call h4 {
+	color: white;
+	text-shadow: 0px 0px 15px rgba(0,0,0,1),
+				1px 1px 1px rgba(0,0,0,1);
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+.body_space {
+	height: 5px;
+}
+
+/*
+	Main links to the pages
+*/
+#links_arrow {
+	/*background: rgba(0,0,0,0.2);*/
+
+	position: fixed;
+}
+#links {
+	/*background: rgba(0,0,0,0.2);*/
+
+}
+
+.pages {
+	/*background: rgba(0,0,0,0.2);*/
+
+	position: fixed;
+	bottom: 0px;
+}
+.pages a {
+	text-decoration: none;
+	color: white;
+	font-family: Georgia;
+	font-size: 125%;
+	text-shadow: 0px 0px 4px rgba(0,0,0,1), 1px 1px 1px rgba(0,0,0,1);
+}
+.pages a:hover {
+	text-decoration: underline;
+}
+.pages a:visited {
+	text-decoration: none;
+}
+.pages ul {
+	list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+.pages_li {
+	display: inline-block;
+	background-color: rgba(0,0,0,0.2);
+	border-radius: 25px;
+	border: solid rgba(0,0,0,0.2) 1px;
+}
+.pages_li_selected {
+	display: inline-block;
+	background-color: rgba(0,182,233,0.3);
+	border-radius: 25px;
+	border: solid rgba(0,0,0,0.5) 1px;
+}
+#links_arrow h2, #mygarden_arrow h2 {
+	margin:0px;
+	color: rgb(255,255,255);
+	text-shadow: 0px 0px 15px rgba(0,0,0,1), 2px 2px 1px rgba(0,0,0,1);
+}
