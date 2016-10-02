@@ -1,4 +1,5 @@
 var express = require("express");
+var bodyParser = require("body-parser");
 var mongoskin = require("mongoskin");
 
 var app = express();
@@ -8,6 +9,7 @@ var port = 80;
 var db = mongoskin.db('mongodb://verdin:nidrev@localhost:27017/verdin');
 
 app.use(express.static('./public'));
+app.use(bodyParser.json());
 /* MAYBE USE THIS
 app.use(errorHandler({
   dumpExceptions: true,
@@ -380,6 +382,29 @@ app.get('/addMeasurement', function(req, res) {
                         res.send('1');
                 }
         });
+});
+
+//POST addMeasurement for JSON
+app.post('/addMeasurement', function(req, res) {
+
+	var measurementObj = req.body;
+	measurementObj.value = parseFloat(measurementObj.value);
+	if (isNaN(measurementObj.value)) {
+		res.send('0');
+	} else {
+		measurementObj.date = Date.now();
+		console.log("\nRequest:\n" + JSON.stringify(measurementObj));
+		res.send('1');
+		/*
+		db.collection('measurements').insert({linkedSensor: linkedSensor, value: value, date: date}, function(err, result) {
+			if (err) {
+				res.send('0');
+			} else {
+				res.send('1');
+			}
+		});
+		*/
+	}
 });
 
 app.get('/getMeasurements', function(req, res) {
