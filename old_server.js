@@ -1,23 +1,44 @@
-var express = require("express");
-var mongoskin = require("mongoskin");
+var express = require("express"),
+    app = express(),
+    bodyParser = require('body-parser'),
+    errorHandler = require('errorhandler'),
+    methodOverride = require('method-override'),
+    hostname = process.env.HOSTNAME || '0.0.0.0',
+    port = 80;
+app.get("/", function (req, res) {
+  res.redirect("/index.html");
+});
+//var auth = require('./authenticate.js');
 
-var app = express();
-var hostname = "0.0.0.0";
-var port = 80;
+var db = require('mongoskin').db('mongodb://verdin:nidrev@localhost:27017/verdin');
 
-var db = mongoskin.db('mongodb://verdin:nidrev@localhost:27017/verdin');
+console.log(db);
+app.use(methodOverride());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
-app.use(express.static('./public'));
-/* MAYBE USE THIS
+var expressSession = require('express-session');
+var cookieParser = require('cookie-parser'); 
+app.use(cookieParser('ame498'));
+app.use(expressSession());
+
+
+app.use(express.static(__dirname + '/public'));
 app.use(errorHandler({
   dumpExceptions: true,
   showStack: true
 }));
-*/
 
-app.get("/", function (req, res) {
-  res.redirect("/index.html");
-});
+
+var fs = require('fs');
+//var AWS = require('aws-sdk');
+//AWS.config.loadFromPath('./credentials.json');
+//var s3 = new AWS.S3()//.client;
+
+//var multipart = require('connect-multiparty');
+//var multipartMiddleware = multipart();
 
 app.get('/getSpecies', function(req, res) {
         db.collection('species').find().toArray(function(err, result) {
@@ -405,5 +426,5 @@ app.get('/getMeasurementsByPlantation', function(req, res) {
         });
 });
 
-console.log("Verdin Server is listening at http://" + hostname + ":" + port);
+console.log("Simple static server listening at http://" + hostname + ":" + port);
 app.listen(port, hostname);
