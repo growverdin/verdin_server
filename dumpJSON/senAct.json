@@ -1,0 +1,4 @@
+{ "_id" : { "$oid" : "56c956ff613f69c9785ef017" }, "id" : "1", "name" : "Soil Moisture Sensor", "io" : "i" }
+{ "_id" : { "$oid" : "56c9571d613f69c9785ef018" }, "id" : "2", "name" : "Water Pump Irrigator", "io" : "o" }
+{ "_id" : { "$oid" : "571b4034201a51487dbfac47" }, "id" : "3", "name" : "Temperature Sensor", "io" : "i" }
+{ "_id" : { "$oid" : "571b5c9deae87ce1e8599d9b" }, "id" : "4", "name" : "pH Sensor", "io" : "i" }

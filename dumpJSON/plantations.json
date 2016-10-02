@@ -1,0 +1,2 @@
+{ "_id" : { "$oid" : "56d7e97ac504c38737271317" }, "id" : "andre1456990518700", "name" : "First Plantation", "species" : { "_id" : "56d36652e7563e7853942dbb", "id" : "1", "name" : "Undefined" } }
+{ "_id" : { "$oid" : "56de33df08d249a2745a0ffa" }, "id" : "andre1457402770652", "name" : "Second Plantation", "species" : { "_id" : "56d36652e7563e7853942dbb", "id" : "1", "name" : "Undefined" } }

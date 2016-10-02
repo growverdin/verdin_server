@@ -1,0 +1,2 @@
+{ "_id" : { "$oid" : "56ceb055c11415636fa27338" }, "id" : "andre1456386078921", "name" : "Indoor Garden", "macAddress" : "F4:B8:5E:D3:2B:FE" }
+{ "_id" : { "$oid" : "57099d5b4faf10c705161e12" }, "id" : "andre1460247909085", "name" : "Device2", "macAddress" : "7C:EC:79:DB:77:AD" }
