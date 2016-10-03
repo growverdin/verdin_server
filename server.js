@@ -393,17 +393,13 @@ app.post('/addMeasurement', function(req, res) {
 		res.send('0');
 	} else {
 		measurementObj.date = Date.now();
-		console.log("\nRequest:\n" + JSON.stringify(measurementObj));
-		res.send('1');
-		/*
-		db.collection('measurements').insert({linkedSensor: linkedSensor, value: value, date: date}, function(err, result) {
+		db.collection('measurements').insert(measurementObj, function(err, result) {
 			if (err) {
 				res.send('0');
 			} else {
 				res.send('1');
 			}
 		});
-		*/
 	}
 });
 
@@ -431,4 +427,7 @@ app.get('/getMeasurementsByPlantation', function(req, res) {
 });
 
 console.log("Verdin Server is listening at http://" + hostname + ":" + port);
+
+console.log("\nDate: " + Date.now());
+
 app.listen(port, hostname);
