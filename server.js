@@ -354,7 +354,7 @@ app.get('/getLinkedActuatorsActions', function(req, res) {
 										if (linkedDevices[i].moistureLevel > lastMeasurements[j].value) {
 											var linkedActuatorAction = {
 												linkedActuator: linkedDevices[i],
-												value: linkedActuator.wateringTime*1000
+												value: linkedDevices[i].wateringTime*1000
 											};
 
 											linkedActuatorsActions.push(linkedActuatorAction);
