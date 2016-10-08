@@ -348,9 +348,19 @@ app.get('/getLinkedActuatorsActions', function(req, res) {
 						if (linkedDevices[i].hasOwnProperty('linkedSensor')) {
 							for (var j=0 ; j<lastMeasurements.length ; j++) {
 								if (linkedDevices[i].linkedSensor.id == lastMeasurements[j]._id) {
-									if (linkedDevices[i].moistureLevel > lastMeasurements[j].value) {
-										linkedActuatorsActions.push(linkedDevices[i]);	
+
+									//if actuator is a water pump
+									if (linkedDevices[i].senAct.id == "2") {
+										if (linkedDevices[i].moistureLevel > lastMeasurements[j].value) {
+											var linkedActuatorAction = {
+												linkedActuator: linkedDevices[i],
+												value: linkedActuator.wateringTime*1000
+											};
+
+											linkedActuatorsActions.push(linkedActuatorAction);
+										}
 									}
+
 									break;
 								}
 							}
