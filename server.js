@@ -427,7 +427,7 @@ app.get('/getMeasurementsByPlantation', function(req, res) {
 	var start = parseInt(req.query.timestampStart);
 	var end = parseInt(req.query.timestampEnd);
 
-	db.collection('measurements').aggregate({$match: {date: {$gt: start, $lt: end}}}, {$sort: {"date": 1}}, {$group: {_id: {id: "$linkedSensor.id", plantation: "$linkedSensor.plantation.name", sensor: "$linkedSensor.senAct.name", port: "$linkedSensor.readPort.name"}, value: {$push: "$value"}, date: {$push: "$date"}}}, function(err, result) {
+	db.collection('measurements').aggregate({$match: {date: {$gt: start, $lt: end}}}, {$sort: {"date": 1}}, {$group: {_id: {id: "$linkedSensor.id", plantation: "$linkedSensor.plantation.name", device: "$linkedSensor.device.name", sensor: "$linkedSensor.senAct.name", port: "$linkedSensor.readPort.name"}, value: {$push: "$value"}, date: {$push: "$date"}}}, function(err, result) {
                 if (result) {
                         res.send(result);
                 } else {

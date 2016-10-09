@@ -35,7 +35,7 @@ function drawMeasurementsCharts() {
 				var data = google.visualization.arrayToDataTable(dataArray);
 				
 				var options = {
-					title: 'Plantation: ' + measurements[i]._id.plantation + ' / Sensor: ' + measurements[i]._id.sensor + ' / Port: ' + measurements[i]._id.port,
+					title: 'Plantation: ' + measurements[i]._id.plantation + ' / Device: ' + measurements[i]._id.device + ' / Sensor: ' + measurements[i]._id.sensor + ' / Port: ' + measurements[i]._id.port,
 					hAxis: {viewWindow: {min: 0.0, max: 24.0}, ticks: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24], title: 'Time',  titleTextStyle: {color: '#333'}},
 					vAxis: {viewWindow: {min: 0, max: 100}}
 				};
