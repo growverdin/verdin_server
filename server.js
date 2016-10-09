@@ -380,6 +380,26 @@ app.get('/getLinkedActuatorsActions', function(req, res) {
         });
 });
 
+//POST addActuation for JSON
+app.post('/addActuation', function(req, res) {
+
+	var actuationObj = req.body;
+	actuationObj.value = parseInt(actuationObj.value);
+	if (isNaN(actuationObj.value)) {
+		res.send('0');
+	} else {
+		actuationObj.date = Date.now();
+		db.collection('actuations').insert(actuationObj, function(err, result) {
+			if (err) {
+				res.send('0');
+			} else {
+				res.send('1');
+			}
+		});
+	}
+});
+
+/*
 app.get('/addMeasurement', function(req, res) {
 	var linkedSensor = JSON.parse(decodeURIComponent(req.query.linkedSensor));
 	var value = parseInt(req.query.value);
@@ -393,6 +413,7 @@ app.get('/addMeasurement', function(req, res) {
                 }
         });
 });
+*/
 
 //POST addMeasurement for JSON
 app.post('/addMeasurement', function(req, res) {
