@@ -388,6 +388,7 @@ app.post('/addActuation', function(req, res) {
 	if (isNaN(actuationObj.value)) {
 		res.send('0');
 	} else {
+		actuationObj.value = actuationObj.value/1000;
 		actuationObj.date = Date.now();
 		db.collection('actuations').insert(actuationObj, function(err, result) {
 			if (err) {
