@@ -184,60 +184,25 @@ function load_measurementsPage() {
 	document.getElementById('measurementsDate').value = dateString;
 	
 	//intanciate datepicker
-	$('.datepicker').datepicker();
+	$('.datepicker_sen').datepicker();
 
 	//draw measurements charts
 	drawMeasurementsCharts();
+}
 
-	/*
-	var url;
+function load_actuationsPage() {
+        //get todays date
+        var today = new Date();
+        var dateString = (today.getMonth()+1 < 10) ? "0" + (today.getMonth()+1) : "" + (today.getMonth()+1);
+        dateString += "/" + (today.getDate() < 10 ? "0" + today.getDate() : "" + today.getDate());
+        dateString += "/" + today.getFullYear();
+        document.getElementById('actuationsDate').value = dateString;
+        
+        //intanciate datepicker
+        $('.datepicker_act').datepicker();
 
-	//get list of measurements
-        url = "../getMeasurements";
-        loadURL(url, function(data) {
-                var res = JSON.parse(data);
-                var html = "";
-                var date;
-                var dateString;
-                
-		if (res.length == 0) {
-                        html += "<h4>You have no measurements!</h4>"
-                } else {
-                        html += "<table class='table'><thead><tr><th>Device</th><th>Sensor</th><th>Port</th><th>Value</th><th>Time</th></thead></tr><tbody>"
-                        for (i=0 ; i<res.length ; i++) {
-                                date = new Date(parseInt(res[i].date));
-                                dateString = (date.getMonth()+1 < 10) ? "0" + (date.getMonth()+1) : "" + (date.getMonth()+1);
-                                dateString += "/" + (date.getDate() < 10 ? "0" + date.getDate() : "" + date.getDate());
-                                dateString += "/" + date.getFullYear();
-                                dateString += " " + (date.getHours() < 10 ? "0" + date.getHours() : "" + date.getHours());
-                                dateString += ":" + (date.getMinutes() < 10 ? "0" + date.getMinutes() : "" + date.getMinutes());
-                                dateString += ":" + (date.getSeconds() < 10 ? "0" + date.getSeconds() : "" + date.getSeconds());
-                                html += "<tr><td>" + res[i].linkedSensor.device.name + "</td><td>" + res[i].linkedSensor.senAct.name + "</td><td>" + res[i].linkedSensor.readPort.name + "</td><td>" + res[i].value + "</td><td>" + dateString + "</td></tr>";
-                        }
-                        html += "</tbody></table>"
-                }
-                document.getElementById('measurements').innerHTML = html;
-		
-
-		//get todays date
-		var today = new Date();
-		dateString = (today.getMonth()+1 < 10) ? "0" + (today.getMonth()+1) : "" + (today.getMonth()+1);
-		dateString += "/" + (today.getDate() < 10 ? "0" + today.getDate() : "" + today.getDate());
-		dateString += "/" + today.getFullYear();
-		document.getElementById('measurementsDate').value = dateString;
-        	
-		//intanciate datepicker
-                $('.datepicker').datepicker();
-		//$('.datepicker').datepicker("option", "defaultDate", new Date(2008,9,3));
-		//autoclose: true
-		$('.datepicker').datepicker({
-			startDate: '-3d'
-		});
-
-		//draw measurements charts
-		drawMeasurementsCharts();
-        });
-	*/
+        //draw actuations charts
+        drawActuationsCharts();
 }
 
 function loadPage() {
@@ -264,6 +229,19 @@ function measurementsLinkClick() {
 	}
 	
 	displayPage('measurementsPage');
+}
+
+function actuationsLinkClick() {
+        var navBarLinks = document.getElementById('navBarLinks').getElementsByTagName('li');
+        for (var i=0 ; i<navBarLinks.length ; i++) {
+                if (navBarLinks[i].id == "actuationsLink") {
+                        navBarLinks[i].className = "active";
+                } else {
+                        navBarLinks[i].className = "";
+                }
+        }
+        
+        displayPage('actuationsPage');
 }
 
 function linksLinkClick() {

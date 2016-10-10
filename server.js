@@ -399,6 +399,19 @@ app.post('/addActuation', function(req, res) {
 	}
 });
 
+app.get('/getActuationsByPlantation', function(req, res) {
+	var start = parseInt(req.query.timestampStart);
+	var end = parseInt(req.query.timestampEnd);
+
+	db.collection('actuations').aggregate({$match: {date: {$gt: start, $lt: end}}}, {$sort: {"date": 1}}, {$group: {_id: {id: "$linkedActuator.id", plantation: "$linkedActuator.plantation.name", device: "$linkedActuator.device.name", actuator: "$linkedActuator.senAct.name", port: "$linkedActuator.port.name"}, value: {$push: "$value"}, date: {$push: "$date"}}}, function(err, result) {
+                if (result) {
+                        res.send(result);
+                } else {
+                        res.send('0');
+                }
+        });
+});
+
 /*
 app.get('/addMeasurement', function(req, res) {
 	var linkedSensor = JSON.parse(decodeURIComponent(req.query.linkedSensor));

@@ -40,36 +40,58 @@ function drawMeasurementsCharts() {
 					vAxis: {viewWindow: {min: 0, max: 100}}
 				};
 
-				document.getElementById('measurementsCharts').innerHTML += "<div id='chart_div" + i + "'></div>";
+				document.getElementById('measurementsCharts').innerHTML += "<div id='chart_div_sen" + i + "'></div>";
 
-				var chart = new google.visualization.AreaChart(document.getElementById('chart_div' + i));
+				var chart = new google.visualization.AreaChart(document.getElementById('chart_div_sen' + i));
 				chart.draw(data, options);
 			}	
 		}				
 	});
+};
 
-/*
-	var data = google.visualization.arrayToDataTable([
-		['Year', 'Sales', 'Expenses'],
-		['2013',  1000,      400],
-		['2014',  1170,      460],
-		['2015',  660,       1120],
-		['2016',  1030,      540]
-	]);
+function drawActuationsCharts() {
+	var day = new Date(document.getElementById('actuationsDate').value);
+	var timestampStart = day.getTime();
+	day.setHours(23);
+	day.setMinutes(59);
+	day.setSeconds(59);
+	day.setMilliseconds(999);
+	var timestampEnd = day.getTime();
+	var url;
+	document.getElementById('actuationsCharts').innerHTML = "";
 
-	var options = {
-		title: 'Company Performance',
-		hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
-		vAxis: {minValue: 0}
-	};
+        //get list of actuations by plantation
+        url = "../getActuationsByPlantation?timestampStart=" + timestampStart.toString() + "&timestampEnd=" + timestampEnd.toString();
+        loadURL(url, function(data) {
+		var actuations = JSON.parse(data);
+		if (actuations.length == 0) {
+			document.getElementById('actuationsCharts').innerHTML += "<h4>You have no actuations for this date!</h4>";
+		} else {
+			var dataArray;
 
+			for (var i=0 ; i<actuations.length ; i++) {
+				dataArray = [];
+				dataArray.push(['Time', 'Watering Time (s)']);
 
-	document.getElementById('measurementsCharts').innerHTML = "<div id='chart_div'></div><div id='chart_div2'></div>";
+				for (var j=0 ; j<actuations[i].date.length ; j++) {
+					var date = new Date(parseInt(actuations[i].date[j]));
+					var time = parseFloat(date.getHours()) + parseFloat(date.getMinutes()/60);
+					dataArray.push([time, parseInt(actuations[i].value[j])]);
+				}
 
-	var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-	chart.draw(data, options);
-	var chart = new google.visualization.AreaChart(document.getElementById('chart_div2'));
-        chart.draw(data, options);
-*/
+				var data = google.visualization.arrayToDataTable(dataArray);
+				
+				var options = {
+					title: 'Plantation: ' + actuations[i]._id.plantation + ' / Device: ' + actuations[i]._id.device + ' / Actuator: ' + actuations[i]._id.actuator + ' / Port: ' + actuations[i]._id.port,
+					hAxis: {viewWindow: {min: 0.0, max: 24.0}, ticks: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24], title: 'Time',  titleTextStyle: {color: '#333'}},
+					vAxis: {viewWindow: {min: 0, max: 10}}
+				};
 
-}
+				document.getElementById('actuationsCharts').innerHTML += "<div id='chart_div_act" + i + "'></div>";
+
+				var chart = new google.visualization.AreaChart(document.getElementById('chart_div_act' + i));
+				chart.draw(data, options);
+			}	
+		}				
+	});
+};

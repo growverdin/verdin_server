@@ -36,12 +36,12 @@
 				        	<li id="measurementsLink">
 				        		<a href="javascript: load_measurementsPage(); measurementsLinkClick();">Measurements</a>
 				        	</li>
-						<li id="linksLink">
-							<a href="javascript: load_linksPage(); linksLinkClick();">Links</a>
-						</li>
-						<li id="socialNetworkLink">
-							<a href="#">Social</a>
-						</li>
+                            <li id="actuationsLink">
+                                <a href="javascript: load_actuationsPage(); actuationsLinkClick();">Actuations</a>
+                            </li>
+    						<li id="linksLink">
+    							<a href="javascript: load_linksPage(); linksLinkClick();">Links</a>
+    						</li>
 			      		</ul>
 				</div>
 			</div>
@@ -313,7 +313,7 @@
 							</div>
 							<div class="col-lg-3">
 								<div class="form-group form-inline">
-									<div class="input-group date" data-provide="datepicker">
+									<div class="input-group date" data-provide="datepicker_sen">
 										<input type="text" class="form-control" id="measurementsDate" onchange="drawMeasurementsCharts()">
 										<div class="input-group-addon">
 											<span class="glyphicon glyphicon-th"></span>
@@ -332,6 +332,40 @@
 				</div>
 			</div>
 		</div>
+
+        <div id="actuationsPage" class="page">
+            <div class="container">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3 style="margin: 0px">Actuations</h3></div>
+                    <div class="container">
+                        <br />  
+                        <div class="row">
+                            <div class="col-lg-1 col-lg-offset-4">
+                                <div class="form-group form-inline">
+                                    <h4>Date: </h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group form-inline">
+                                    <div class="input-group date" data-provide="datepicker_act">
+                                        <input type="text" class="form-control" id="actuationsDate" onchange="drawActuationsCharts()">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>                                                                
+
+                                </div>
+
+                            </div>
+                        </div>
+                
+                    </div>
+                    <div id="actuationsCharts">
+                    </div>
+                    <div id="actuations" class="table-responsive"></div>
+                </div>
+            </div>
+        </div>
 
 	</body>
 </html>
