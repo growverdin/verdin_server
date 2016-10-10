@@ -111,8 +111,10 @@ function linkActuator() {
 	var url;
 	if (document.getElementById('linkActuatorBasedonRadio0').checked) {
 		var period = document.getElementById('linkActuatorPeriod').value;
+		var startDate = new Date(document.getElementById('actuatorStartDate').value);
+		var startDateTimestamp = startDate.getTime().toString();
 
-		url = "../linkDevices?id=" + getUniqueId() + "&device=" + encodeURIComponent(device) + "&plantation=" + encodeURIComponent(plantation) + "&senAct=" + encodeURIComponent(actuator) + "&port=" + encodeURIComponent(port) + "&wateringTime=" + encodeURIComponent(wateringTime) + "&period=" + encodeURIComponent(period);
+		url = "../linkDevices?id=" + getUniqueId() + "&device=" + encodeURIComponent(device) + "&plantation=" + encodeURIComponent(plantation) + "&senAct=" + encodeURIComponent(actuator) + "&port=" + encodeURIComponent(port) + "&wateringTime=" + encodeURIComponent(wateringTime) + "&period=" + encodeURIComponent(period) + "&startDate=" + encodeURIComponent(startDateTimestamp);
 		loadURL(url, function(data) {
 			var res = data;
 			if (res == "1") {

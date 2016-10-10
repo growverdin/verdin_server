@@ -241,12 +241,13 @@ app.get('/linkDevices', function(req, res) {
 
 		if (req.query.hasOwnProperty("period")) {
 			var period = decodeURIComponent(req.query.period);
+			var startDate = parseInt(decodeURIComponent(req.query.startDate));
 
 			db.collection('linkedDevices').findOne(req.query, function(err, result) {
 				if (result) {
 					res.send('-1');
 				} else {
-					db.collection('linkedDevices').insert({id: id, senAct: senAct, plantation: plantation, device: device, port: port, wateringTime: wateringTime, period: period}, function(err, result) {
+					db.collection('linkedDevices').insert({id: id, senAct: senAct, plantation: plantation, device: device, port: port, wateringTime: wateringTime, period: period, startDate: startDate}, function(err, result) {
 						if (err) {
 							res.send('0');
 						} else {

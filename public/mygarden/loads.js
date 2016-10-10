@@ -173,6 +173,14 @@ function load_linkActuatorPage() {
 		//get list of available ports
 	        linkActuatorDeviceChanged();
         });
+
+	//add todays date to start date
+	var today = new Date();
+	var dateString = (today.getMonth()+1 < 10) ? "0" + (today.getMonth()+1) : "" + (today.getMonth()+1);
+	dateString += "/" + (today.getDate() < 10 ? "0" + today.getDate() : "" + today.getDate());
+	dateString += "/" + today.getFullYear();
+	document.getElementById('actuatorStartDate').value = dateString;
+
 }
 
 function load_measurementsPage() {
@@ -262,10 +270,12 @@ function linkActuatorBasedonRadioChanged() {
 		document.getElementById('linkActuatorSensorRow').style.display = "none";
                 document.getElementById('linkActuatorMoistureLevelRow').style.display = "none";
                 document.getElementById('linkActuatorPeriodRow').style.display = "";
+		document.getElementById('linkActuatorStartDateRow').style.display = "";
 	} else if (document.getElementById('linkActuatorBasedonRadio1').checked) {
 		document.getElementById('linkActuatorSensorRow').style.display = "";
                 document.getElementById('linkActuatorMoistureLevelRow').style.display = "";
                 document.getElementById('linkActuatorPeriodRow').style.display = "none";
+		document.getElementById('linkActuatorStartDateRow').style.display = "none";
 	}
 }
 
