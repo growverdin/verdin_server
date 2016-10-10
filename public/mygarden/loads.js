@@ -184,7 +184,7 @@ function load_measurementsPage() {
 	document.getElementById('measurementsDate').value = dateString;
 	
 	//intanciate datepicker
-	$('.datepicker_sen').datepicker();
+	$('.datepicker').datepicker();
 
 	//draw measurements charts
 	drawMeasurementsCharts();
@@ -199,7 +199,7 @@ function load_actuationsPage() {
         document.getElementById('actuationsDate').value = dateString;
         
         //intanciate datepicker
-        $('.datepicker_act').datepicker();
+        $('.datepicker').datepicker();
 
         //draw actuations charts
         drawActuationsCharts();
