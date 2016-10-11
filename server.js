@@ -348,7 +348,7 @@ app.get('/getLinkedActuatorsActions', function(req, res) {
 					lastMeasurements = result;
 				}
 
-				db.collection('actuations').aggregate({$sort: {date: 1}}, {$group: {_id: "$linkedActuator.id", value: {$last: "$value"}}}, function(err, result) {
+				db.collection('actuations').aggregate({$sort: {date: 1}}, {$group: {_id: "$linkedActuator.id", value: {$last: "$value"}, date: {$last: "$date"}}}, function(err, result) {
 
 					var lastActuations = [];
 					if (result) {
@@ -382,10 +382,10 @@ app.get('/getLinkedActuatorsActions', function(req, res) {
 							var startDate = linkedDevices[i].startDate;
 							var period = linkedDevices[i].period;
 
-							var periodCount = parseInt((((now - startDate)/60)/60)/period);
+							var periodCount = parseInt(((((now - startDate)/1000)/60)/60)/period);
 
-							var startPeriod = startDate + (period * periodCount);
-							var endPeriod = startDate + (period * (periodCount + 1));
+							var startPeriod = startDate + ((((period * periodCount)*60)*60)*1000);
+							var endPeriod = startDate + ((((period * (periodCount + 1))*60)*60)*1000);
 
 							//if actuator is a water pump
 							if (linkedDevices[i].senAct.id == "2") {
@@ -410,7 +410,7 @@ app.get('/getLinkedActuatorsActions', function(req, res) {
 							}
 						}
 					}
-
+					
 					res.send(linkedActuatorsActions);
 				});
 			});
