@@ -84,13 +84,16 @@ function drawActuationsCharts() {
 				var options = {
 					title: 'Plantation: ' + actuations[i]._id.plantation + ' / Device: ' + actuations[i]._id.device + ' / Actuator: ' + actuations[i]._id.actuator + ' / Port: ' + actuations[i]._id.port,
 					hAxis: {viewWindow: {min: 0.0, max: 24.0}, ticks: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24], title: 'Time',  titleTextStyle: {color: '#333'}},
-					vAxis: {viewWindow: {min: 0, max: 10}}
+					vAxis: {viewWindow: {min: 0, max: 10}},
+					bar: {groupWidth: "5"}
 				};
+
+				var view = new google.visualization.DataView(data);
 
 				document.getElementById('actuationsCharts').innerHTML += "<div id='chart_div_act" + i + "'></div>";
 
-				var chart = new google.visualization.AreaChart(document.getElementById('chart_div_act' + i));
-				chart.draw(data, options);
+				var chart = new google.visualization.ColumnChart(document.getElementById('chart_div_act' + i));
+				chart.draw(view, options);
 			}	
 		}				
 	});
