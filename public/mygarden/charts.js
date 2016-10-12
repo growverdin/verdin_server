@@ -1,6 +1,4 @@
 google.charts.load('current', {'packages':['corechart']});
-//google.charts.setOnLoadCallback(drawChart);
-
 
 function drawMeasurementsCharts() {
 	var day = new Date(document.getElementById('measurementsDate').value);
@@ -32,8 +30,6 @@ function drawMeasurementsCharts() {
 					dataArray.push([time, parseInt(measurements[i].value[j])]);
 				}
 
-				var data = google.visualization.arrayToDataTable(dataArray);
-				
 				var options = {
 					title: 'Plantation: ' + measurements[i]._id.plantation + ' / Device: ' + measurements[i]._id.device + ' / Sensor: ' + measurements[i]._id.sensor + ' / Port: ' + measurements[i]._id.port,
 					hAxis: {viewWindow: {min: 0.0, max: 24.0}, ticks: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24], title: 'Time',  titleTextStyle: {color: '#333'}},
@@ -42,8 +38,11 @@ function drawMeasurementsCharts() {
 
 				document.getElementById('measurementsCharts').innerHTML += "<div id='chart_div_sen" + i + "'></div>";
 
-				var chart = new google.visualization.AreaChart(document.getElementById('chart_div_sen' + i));
-				chart.draw(data, options);
+				google.charts.setOnLoadCallback(function() {
+					var data = google.visualization.arrayToDataTable(dataArray);
+					var chart = new google.visualization.AreaChart(document.getElementById('chart_div_sen' + i));
+                        	        chart.draw(data, options);	
+				});
 			}	
 		}				
 	});
@@ -79,8 +78,6 @@ function drawActuationsCharts() {
 					dataArray.push([time, parseInt(actuations[i].value[j])]);
 				}
 
-				var data = google.visualization.arrayToDataTable(dataArray);
-				
 				var options = {
 					title: 'Plantation: ' + actuations[i]._id.plantation + ' / Device: ' + actuations[i]._id.device + ' / Actuator: ' + actuations[i]._id.actuator + ' / Port: ' + actuations[i]._id.port,
 					hAxis: {viewWindow: {min: 0.0, max: 24.0}, ticks: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24], title: 'Time',  titleTextStyle: {color: '#333'}},
@@ -88,12 +85,14 @@ function drawActuationsCharts() {
 					bar: {groupWidth: "5"}
 				};
 
-				var view = new google.visualization.DataView(data);
-
 				document.getElementById('actuationsCharts').innerHTML += "<div id='chart_div_act" + i + "'></div>";
 
-				var chart = new google.visualization.ColumnChart(document.getElementById('chart_div_act' + i));
-				chart.draw(view, options);
+				google.charts.setOnLoadCallback(function() {
+					var data = google.visualization.arrayToDataTable(dataArray);
+					var view = new google.visualization.DataView(data);
+					var chart = new google.visualization.ColumnChart(document.getElementById('chart_div_act' + i));
+					chart.draw(view, options);
+				});
 			}	
 		}				
 	});
